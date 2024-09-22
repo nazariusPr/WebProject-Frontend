@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import FormData from "../components/FormData";
+import EmailVerificationMessage from "../components/EmailVerificationMessage";
 import RoutesConstant from "../constants/client/RoutesConstant";
 import styles from "../styles/Page.module.css";
 import { FieldType } from "../components/FormData";
@@ -10,6 +11,7 @@ function RegistrationPage() {
     email: "",
     password: "",
   });
+  const [isSent, setIsSent] = useState<boolean>(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -18,9 +20,9 @@ function RegistrationPage() {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = () => {
     console.log("Login data:", formData);
+    setIsSent(true);
   };
 
   const fields: FieldType<AuthenticationDto>[] = [
@@ -30,16 +32,20 @@ function RegistrationPage() {
 
   return (
     <div className={styles.container}>
-      <FormData
-        handleSubmit={handleSubmit}
-        formData={formData}
-        formTitle="Registration Page"
-        handleChange={handleChange}
-        fields={fields}
-        description="Already have an account?"
-        linkText="Log in here"
-        linkTo={RoutesConstant.LOGIN}
-      />
+      {isSent ? (
+        <EmailVerificationMessage email={formData.email} onResend={() => {}} />
+      ) : (
+        <FormData
+          handleSubmit={handleSubmit}
+          formData={formData}
+          formTitle="Registration Page"
+          handleChange={handleChange}
+          fields={fields}
+          description="Already have an account?"
+          linkText="Log in here"
+          linkTo={RoutesConstant.LOGIN}
+        />
+      )}
     </div>
   );
 }

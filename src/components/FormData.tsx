@@ -1,5 +1,6 @@
-import React, { ChangeEvent } from "react";
+import { ChangeEvent } from "react";
 import { Link } from "react-router-dom";
+import Button from "./Button";
 import styles from "../styles/FormData.module.css";
 
 export type FieldType<T> = {
@@ -10,7 +11,7 @@ export type FieldType<T> = {
 
 type FormDataParams<T> = {
   formTitle: string;
-  handleSubmit: (e: React.FormEvent) => void;
+  handleSubmit: () => void;
   formData: T;
   handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
   fields: FieldType<T>[];
@@ -45,9 +46,7 @@ function FormData<T>({
           />
         </div>
       ))}
-      <button type="submit" className={styles.button}>
-        Submit
-      </button>
+      <Button onClick={handleSubmit}>Submit</Button>
       {description && (
         <p className={styles.description}>
           {description}{" "}
