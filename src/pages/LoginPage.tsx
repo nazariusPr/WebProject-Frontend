@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import FormData from "../components/FormData";
 import RoutesConstant from "../constants/client/RoutesConstant";
-import styles from "../styles/LoginPage.module.css";
+import styles from "../styles/Page.module.css";
 import { FieldType } from "../components/FormData";
 import { AuthenticationDto } from "../types/Authentication";
 
