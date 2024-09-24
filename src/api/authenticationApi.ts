@@ -1,6 +1,12 @@
 import axiosInstance from "./axiosInstance";
 import { AuthenticationDto } from "../types/Authentication";
 
-export async function authenticateUser(authenticationDto: AuthenticationDto) {
-  return await axiosInstance.post("/auth", authenticationDto);
+export function authenticateUser(authenticationDto: AuthenticationDto) {
+  return axiosInstance.post("/auth", authenticationDto, {
+    withCredentials: true,
+  });
+}
+
+export function refreshToken() {
+  return axiosInstance.get("/auth/refresh-token", { withCredentials: true });
 }

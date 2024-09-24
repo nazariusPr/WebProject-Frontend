@@ -7,6 +7,7 @@ import {
   ReactNode,
 } from "react";
 import axios from "axios";
+import { refreshToken } from "../api/authenticationApi";
 
 type AuthProviderProps = {
   children: ReactNode;
@@ -24,10 +25,6 @@ export function useAuth() {
   return useContext(AuthContext);
 }
 
-const refreshToken = async () => {
-  return "newAccessToken";
-};
-
 export function AuthProvider({ children }: AuthProviderProps) {
   const [accessToken, setAccessToken] = useState<string | null>(null);
   const [accessTokenLoading, setAccessTokenLoading] = useState<boolean>(true);
@@ -36,7 +33,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     const fetchMe = async () => {
       try {
         const response = await refreshToken();
-        setAccessToken(response);
+        setAccessToken(response.data.access_token);
       } catch {
         setAccessToken(null);
       } finally {
@@ -71,10 +68,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
           !originalRequest._retry
         ) {
           try {
-            const token = await refreshToken();
-            setAccessToken(token);
+            const response = await refreshToken();
+            const access_token = response.data.access_token;
+            setAccessToken(access_token);
 
-            originalRequest.headers.Authorization = `Bearer ${token}`;
+            originalRequest.headers.Authorization = `Bearer ${access_token}`;
             originalRequest._retry = true;
 
             return axios(originalRequest);
