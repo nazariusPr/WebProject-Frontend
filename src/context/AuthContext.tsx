@@ -15,6 +15,7 @@ type AuthProviderProps = {
 type AuthContextType = {
   accessToken: string | null;
   setAccessToken: (accessToken: string | null) => void;
+  accessTokenLoading: boolean;
 };
 
 const AuthContext = createContext({} as AuthContextType);
@@ -29,6 +30,7 @@ const refreshToken = async () => {
 
 export function AuthProvider({ children }: AuthProviderProps) {
   const [accessToken, setAccessToken] = useState<string | null>(null);
+  const [accessTokenLoading, setAccessTokenLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchMe = async () => {
@@ -37,6 +39,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
         setAccessToken(response);
       } catch {
         setAccessToken(null);
+      } finally {
+        setAccessTokenLoading(false);
       }
     };
     fetchMe();
@@ -88,7 +92,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ accessToken, setAccessToken }}>
+    <AuthContext.Provider
+      value={{ accessToken, setAccessToken, accessTokenLoading }}
+    >
       {children}
     </AuthContext.Provider>
   );

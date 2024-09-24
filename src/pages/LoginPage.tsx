@@ -4,12 +4,16 @@ import RoutesConstant from "../constants/client/RoutesConstant";
 import styles from "../styles/Page.module.css";
 import { FieldType } from "../components/FormData";
 import { AuthenticationDto } from "../types/Authentication";
+import { authenticateUser } from "../api/authenticationApi";
+import { useAuth } from "../context/AuthContext";
 
 const LoginPage: React.FC = () => {
   const [formData, setFormData] = useState<AuthenticationDto>({
     email: "",
     password: "",
   });
+
+  const { setAccessToken } = useAuth();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -18,8 +22,13 @@ const LoginPage: React.FC = () => {
     });
   };
 
-  const handleSubmit = () => {
-    console.log("Login data:", formData);
+  const handleSubmit = async () => {
+    try {
+      const response = await authenticateUser(formData);
+      setAccessToken(response.data.access_token);
+    } catch (error) {
+      console.error("Error during authentication:", error);
+    }
   };
 
   const fields: FieldType<AuthenticationDto>[] = [

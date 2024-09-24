@@ -3,7 +3,10 @@ import { useAuth } from "../context/AuthContext";
 import RoutesConstant from "../constants/client/RoutesConstant";
 
 const ProtectedRoutes = () => {
-  const { accessToken } = useAuth();
+  const { accessToken, accessTokenLoading } = useAuth();
+  if (accessTokenLoading) {
+    return <div>Loading...</div>;
+  }
   return accessToken ? <Outlet /> : <Navigate to={RoutesConstant.LOGIN} />;
 };
 
