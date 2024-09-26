@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import FormData from "../components/FormData";
 import EmailVerificationMessage from "../components/EmailVerificationMessage";
 import RoutesConstant from "../constants/client/RoutesConstant";
 import styles from "../styles/Page.module.css";
 import { FieldType } from "../components/FormData";
 import { AuthenticationDto } from "../types/Authentication";
+import { registerUser } from "../api/authenticationApi";
 
 function RegistrationPage() {
   const [formData, setFormData] = useState<AuthenticationDto>({
@@ -20,9 +21,13 @@ function RegistrationPage() {
     });
   };
 
-  const handleSubmit = () => {
-    console.log("Login data:", formData);
-    setIsSent(true);
+  const handleSubmit = async () => {
+    try {
+      await registerUser(formData);
+      setIsSent(true);
+    } catch (error) {
+      console.error("Error during authentication:", error);
+    }
   };
 
   const fields: FieldType<AuthenticationDto>[] = [
