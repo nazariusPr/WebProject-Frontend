@@ -8,9 +8,7 @@ export function authenticateUser(authenticationDto: AuthenticationDto) {
   });
 }
 
-export function registerUser(
-  authenticationDto: AuthenticationDto
-): Promise<void> {
+export function registerUser(authenticationDto: AuthenticationDto) {
   return axiosInstance.post(ApiConstants.REGISTER_USER, authenticationDto);
 }
 
@@ -25,4 +23,8 @@ export function verifyEmail(token: string) {
     params: { token },
     withCredentials: true,
   });
+}
+
+export function logout() {
+  return axiosInstance.delete(ApiConstants.LOGOUT, { withCredentials: true });
 }
