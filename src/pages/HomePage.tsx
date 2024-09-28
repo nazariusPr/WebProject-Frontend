@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { logout } from "../api/authenticationApi";
 import RoutesConstant from "../constants/client/RoutesConstant";
-import Button from "../components/Button";
+import Button from "../components/UI/Button";
 
 const HomePage = () => {
   const { setAccessToken } = useAuth();
