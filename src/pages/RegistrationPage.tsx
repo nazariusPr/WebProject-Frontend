@@ -3,6 +3,7 @@ import FormData from "../components/FormData";
 import EmailVerificationMessage from "../components/EmailVerificationMessage";
 import RoutesConstant from "../constants/client/RoutesConstant";
 import styles from "../styles/Page.module.css";
+import Validator from "../utils/validator";
 import { FieldType } from "../components/FormData";
 import { AuthenticationDto } from "../types/Authentication";
 import { registerUser } from "../api/authenticationApi";
@@ -31,8 +32,18 @@ function RegistrationPage() {
   };
 
   const fields: FieldType<AuthenticationDto>[] = [
-    { name: "email", label: "Email", type: "email" },
-    { name: "password", label: "Password", type: "password" },
+    {
+      name: "email",
+      label: "Email",
+      type: "email",
+      validation: Validator.validateEmail,
+    },
+    {
+      name: "password",
+      label: "Password",
+      type: "password",
+      validation: Validator.validatePassword,
+    },
   ];
 
   return (

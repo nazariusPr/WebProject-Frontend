@@ -6,6 +6,7 @@ import { FieldType } from "../components/FormData";
 import { AuthenticationDto } from "../types/Authentication";
 import { authenticateUser } from "../api/authenticationApi";
 import { useAuth } from "../context/AuthContext";
+import Validator from "../utils/validator";
 
 const LoginPage: React.FC = () => {
   const [formData, setFormData] = useState<AuthenticationDto>({
@@ -32,8 +33,18 @@ const LoginPage: React.FC = () => {
   };
 
   const fields: FieldType<AuthenticationDto>[] = [
-    { name: "email", label: "Email", type: "email" },
-    { name: "password", label: "Password", type: "password" },
+    {
+      name: "email",
+      label: "Email",
+      type: "email",
+      validation: Validator.validateEmail,
+    },
+    {
+      name: "password",
+      label: "Password",
+      type: "password",
+      validation: Validator.validatePassword,
+    },
   ];
 
   return (
