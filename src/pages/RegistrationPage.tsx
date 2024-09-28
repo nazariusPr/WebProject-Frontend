@@ -1,4 +1,7 @@
 import { useState } from "react";
+import axios from "axios";
+import { message } from "antd";
+import withLoading from "../hoc/withLoading/withLoading";
 import Form from "../components/UI/Form";
 import EmailVerificationMessage from "../components/email/EmailVerificationMessage";
 import RoutesConstant from "../constants/client/RoutesConstant";
@@ -8,7 +11,11 @@ import { FieldType } from "../components/UI/Form";
 import { AuthenticationDto } from "../types/Authentication";
 import { registerUser } from "../api/authenticationApi";
 
-function RegistrationPage() {
+type RegistrationPage = {
+  setLoading: (state: boolean) => void;
+};
+
+function RegistrationPage({ setLoading }: RegistrationPage) {
   const [formData, setFormData] = useState<AuthenticationDto>({
     email: "",
     password: "",
@@ -24,10 +31,19 @@ function RegistrationPage() {
 
   const handleSubmit = async () => {
     try {
+      setLoading(true);
       await registerUser(formData);
       setIsSent(true);
     } catch (error) {
-      console.error("Error during authentication:", error);
+      let notification;
+      if (axios.isAxiosError(error)) {
+        notification = error.response?.data?.message;
+      } else {
+        notification = "Registration failed. Please try again.";
+      }
+      message.error(notification);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -66,4 +82,4 @@ function RegistrationPage() {
   );
 }
 
-export default RegistrationPage;
+export default withLoading(RegistrationPage);

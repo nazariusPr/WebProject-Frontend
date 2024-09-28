@@ -1,14 +1,21 @@
-import React, { useState } from "react";
+import axios from "axios";
+import { useState } from "react";
 import Form from "../components/UI/Form";
 import RoutesConstant from "../constants/client/RoutesConstant";
 import styles from "../styles/main.module.css";
+import { message } from "antd";
 import { FieldType } from "../components/UI/Form";
 import { AuthenticationDto } from "../types/Authentication";
 import { authenticateUser } from "../api/authenticationApi";
 import { useAuth } from "../context/AuthContext";
+import withLoading from "../hoc/withLoading/withLoading";
 import Validator from "../utils/validator";
 
-function LoginPage() {
+type LoginPageType = {
+  setLoading: (state: boolean) => void;
+};
+
+function LoginPage({ setLoading }: LoginPageType) {
   const [formData, setFormData] = useState<AuthenticationDto>({
     email: "",
     password: "",
@@ -25,10 +32,23 @@ function LoginPage() {
 
   const handleSubmit = async () => {
     try {
+      setLoading(true);
+
       const response = await authenticateUser(formData);
       setAccessToken(response.data.access_token);
+
+      message.success("Welcome !");
     } catch (error) {
-      console.error("Error during authentication:", error);
+      let notification;
+
+      if (axios.isAxiosError(error)) {
+        notification = error.response?.data?.message;
+      } else {
+        notification = "Authentication failed. Please try again.";
+      }
+      message.error(notification);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -63,4 +83,4 @@ function LoginPage() {
   );
 }
 
-export default LoginPage;
+export default withLoading(LoginPage);

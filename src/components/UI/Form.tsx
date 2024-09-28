@@ -1,4 +1,5 @@
 import { ChangeEvent, useState } from "react";
+import { message } from "antd";
 import Description from "../general/Description";
 import Input from "./Input";
 import Button from "./Button";
@@ -33,6 +34,7 @@ function Form<T>({
   handleChange,
 }: FormParams<T>) {
   const [errors, setErrors] = useState<Record<string, string | null>>({});
+  const hasErrors = Object.values(errors).some((error) => error !== null);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -49,6 +51,14 @@ function Form<T>({
     }
   };
 
+  const onError = () => {
+    const errorMessages = Object.values(errors)
+      .filter((error) => error !== null)
+      .join("\n");
+
+    message.error(errorMessages || "There are some validation errors.");
+  };
+
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
       <h2 className={styles.title}>{formTitle}</h2>
@@ -61,7 +71,7 @@ function Form<T>({
           onChange={handleInputChange}
         />
       ))}
-      <Button onClick={!errors ? handleSubmit : () => {}}>Submit</Button>
+      <Button onClick={hasErrors ? onError : handleSubmit}>Submit</Button>
       {description && (
         <Description linkText={linkText} linkTo={linkTo}>
           {description}
