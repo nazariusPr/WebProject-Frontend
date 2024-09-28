@@ -2,7 +2,7 @@ import { useState } from "react";
 import Form from "../components/UI/Form";
 import EmailVerificationMessage from "../components/email/EmailVerificationMessage";
 import RoutesConstant from "../constants/client/RoutesConstant";
-import styles from "../styles/Page.module.css";
+import styles from "../styles/main.module.css";
 import Validator from "../utils/validator";
 import { FieldType } from "../components/UI/Form";
 import { AuthenticationDto } from "../types/Authentication";

@@ -2,7 +2,7 @@ import { ChangeEvent, useState } from "react";
 import Description from "../general/Description";
 import Input from "./Input";
 import Button from "./Button";
-import styles from "../../styles/FormData.module.css";
+import styles from "../../styles/main.module.css";
 
 export type FieldType<T> = {
   name: keyof T;

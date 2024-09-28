@@ -1,5 +1,5 @@
 import { Link as Lnk } from "react-router-dom";
-import styles from "../../styles/FormData.module.css";
+import styles from "../../styles/main.module.css";
 
 type LinkProps = {
   children: string;

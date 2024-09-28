@@ -1,6 +1,6 @@
 import { ChangeEvent } from "react";
 import { FieldType } from "./Form";
-import styles from "../../styles/FormData.module.css";
+import styles from "../../styles/main.module.css";
 
 type InputProps<T> = {
   value: string;

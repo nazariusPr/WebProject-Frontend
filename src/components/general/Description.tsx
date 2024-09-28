@@ -1,4 +1,4 @@
-import styles from "../../styles/FormData.module.css";
+import styles from "../../styles/main.module.css";
 import Link from "../UI/Link";
 
 type DescriptionProps = {

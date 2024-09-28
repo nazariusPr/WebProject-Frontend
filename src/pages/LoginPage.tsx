@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Form from "../components/UI/Form";
 import RoutesConstant from "../constants/client/RoutesConstant";
-import styles from "../styles/Page.module.css";
+import styles from "../styles/main.module.css";
 import { FieldType } from "../components/UI/Form";
 import { AuthenticationDto } from "../types/Authentication";
 import { authenticateUser } from "../api/authenticationApi";

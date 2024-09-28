@@ -1,3 +1,9 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
 .form {
   display: flex;
   flex-direction: column;
@@ -16,6 +22,13 @@
   color: #333;
   margin-bottom: 20px;
   font-size: 1.5em;
+}
+
+.container {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .fieldContainer {
@@ -62,6 +75,27 @@
 .link:hover {
   color: #0056b3;
   text-decoration: underline;
+}
+
+.button {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
+  background-color: #007bff;
+  color: white;
+  font-size: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.button:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+.button:active {
+  transform: translateY(0);
 }
 
 @media (max-width: 600px) {
