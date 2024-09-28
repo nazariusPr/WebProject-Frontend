@@ -1,5 +1,5 @@
 import { ChangeEvent, useState } from "react";
-import { Link } from "react-router-dom";
+import Description from "../general/Description";
 import Input from "./Input";
 import Button from "./Button";
 import styles from "../../styles/FormData.module.css";
@@ -54,6 +54,7 @@ function Form<T>({
       <h2 className={styles.title}>{formTitle}</h2>
       {fields.map((field) => (
         <Input
+          key={field.name as string}
           value={formData[field.name] as string}
           field={field}
           errorMessage={errors[field.name as string]}
@@ -62,14 +63,9 @@ function Form<T>({
       ))}
       <Button onClick={!errors ? handleSubmit : () => {}}>Submit</Button>
       {description && (
-        <p className={styles.description}>
-          {description}{" "}
-          {linkTo && linkText && (
-            <Link to={linkTo} className={styles.link}>
-              {linkText}
-            </Link>
-          )}
-        </p>
+        <Description linkText={linkText} linkTo={linkTo}>
+          {description}
+        </Description>
       )}
     </form>
   );

@@ -7,19 +7,25 @@ type InputProps<T> = {
   field: FieldType<T>;
   errorMessage: string | null;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  className?: string;
 };
 
-function Input<T>({ value, field, errorMessage, onChange }: InputProps<T>) {
+function Input<T>({
+  value,
+  field,
+  errorMessage,
+  onChange,
+  className,
+}: InputProps<T>) {
   return (
-    <div key={field.name as string} className={styles.fieldContainer}>
+    <div className={styles.fieldContainer}>
       <label className={styles.label}>{field.label}:</label>
       <input
         type={field.type}
         name={field.name as string}
         value={value}
         onChange={onChange}
-        className={styles.input}
-        required
+        className={`${styles.input} ${className || ""}`}
       />
       {errorMessage && <span className={styles.error}>{errorMessage}</span>}
     </div>
