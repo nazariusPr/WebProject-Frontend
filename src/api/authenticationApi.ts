@@ -25,6 +25,13 @@ export function verifyEmail(token: string) {
   });
 }
 
+export function resendVerificationEmail(email: string) {
+  return axiosInstance.post(ApiConstants.RESEND_VERIFICATION_EMAIL, null, {
+    params: { email },
+    withCredentials: true,
+  });
+}
+
 export function logout() {
   return axiosInstance.delete(ApiConstants.LOGOUT, { withCredentials: true });
 }

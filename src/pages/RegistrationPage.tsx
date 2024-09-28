@@ -9,7 +9,10 @@ import styles from "../styles/main.module.css";
 import Validator from "../utils/validator";
 import { FieldType } from "../components/UI/Form";
 import { AuthenticationDto } from "../types/Authentication";
-import { registerUser } from "../api/authenticationApi";
+import {
+  registerUser,
+  resendVerificationEmail,
+} from "../api/authenticationApi";
 
 type RegistrationPage = {
   setLoading: (state: boolean) => void;
@@ -47,6 +50,24 @@ function RegistrationPage({ setLoading }: RegistrationPage) {
     }
   };
 
+  const handleResendEmail = async () => {
+    try {
+      setLoading(true);
+      await resendVerificationEmail(formData.email);
+      message.success("Email was resent !");
+    } catch (error) {
+      let notification;
+      if (axios.isAxiosError(error)) {
+        notification = error.response?.data?.message;
+      } else {
+        notification = "Resend failed. Please try again.";
+      }
+      message.error(notification);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const fields: FieldType<AuthenticationDto>[] = [
     {
       name: "email",
@@ -65,7 +86,10 @@ function RegistrationPage({ setLoading }: RegistrationPage) {
   return (
     <div className={styles.container}>
       {isSent ? (
-        <EmailVerificationMessage email={formData.email} onResend={() => {}} />
+        <EmailVerificationMessage
+          email={formData.email}
+          onResend={handleResendEmail}
+        />
       ) : (
         <Form
           handleSubmit={handleSubmit}
