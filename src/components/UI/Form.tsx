@@ -1,7 +1,8 @@
 import { ChangeEvent, useState } from "react";
 import { Link } from "react-router-dom";
+import Input from "./Input";
 import Button from "./Button";
-import styles from "../styles/FormData.module.css";
+import styles from "../../styles/FormData.module.css";
 
 export type FieldType<T> = {
   name: keyof T;
@@ -10,7 +11,7 @@ export type FieldType<T> = {
   validation: (value: string) => string | null;
 };
 
-type FormDataParams<T> = {
+type FormParams<T> = {
   formTitle: string;
   handleSubmit: () => void;
   formData: T;
@@ -21,16 +22,16 @@ type FormDataParams<T> = {
   linkTo?: string;
 };
 
-function FormData<T>({
+function Form<T>({
   formTitle,
-  handleSubmit,
   formData,
-  handleChange,
   fields,
   description,
   linkText,
   linkTo,
-}: FormDataParams<T>) {
+  handleSubmit,
+  handleChange,
+}: FormParams<T>) {
   const [errors, setErrors] = useState<Record<string, string | null>>({});
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -52,22 +53,14 @@ function FormData<T>({
     <form onSubmit={handleSubmit} className={styles.form}>
       <h2 className={styles.title}>{formTitle}</h2>
       {fields.map((field) => (
-        <div key={field.name as string} className={styles.fieldContainer}>
-          <label className={styles.label}>{field.label}:</label>
-          <input
-            type={field.type}
-            name={field.name as string}
-            value={formData[field.name] as string}
-            onChange={handleInputChange}
-            className={styles.input}
-            required
-          />
-          {errors[field.name as string] && (
-            <span className={styles.error}>{errors[field.name as string]}</span>
-          )}
-        </div>
+        <Input
+          value={formData[field.name] as string}
+          field={field}
+          errorMessage={errors[field.name as string]}
+          onChange={handleInputChange}
+        />
       ))}
-      <Button onClick={errors ? () => {} : handleSubmit}>Submit</Button>
+      <Button onClick={!errors ? handleSubmit : () => {}}>Submit</Button>
       {description && (
         <p className={styles.description}>
           {description}{" "}
@@ -82,4 +75,4 @@ function FormData<T>({
   );
 }
 
-export default FormData;
+export default Form;

@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import FormData from "../components/FormData";
+import Form from "../components/UI/Form";
 import RoutesConstant from "../constants/client/RoutesConstant";
 import styles from "../styles/Page.module.css";
-import { FieldType } from "../components/FormData";
+import { FieldType } from "../components/UI/Form";
 import { AuthenticationDto } from "../types/Authentication";
 import { authenticateUser } from "../api/authenticationApi";
 import { useAuth } from "../context/AuthContext";
 import Validator from "../utils/validator";
 
-const LoginPage: React.FC = () => {
+function LoginPage() {
   const [formData, setFormData] = useState<AuthenticationDto>({
     email: "",
     password: "",
@@ -49,18 +49,18 @@ const LoginPage: React.FC = () => {
 
   return (
     <div className={styles.container}>
-      <FormData
-        handleSubmit={handleSubmit}
+      <Form
+        fields={fields}
         formData={formData}
         formTitle="Login Page"
-        handleChange={handleChange}
-        fields={fields}
         description="Don't have an account?"
         linkText="Register here"
         linkTo={RoutesConstant.REGISTER}
+        handleSubmit={handleSubmit}
+        handleChange={handleChange}
       />
     </div>
   );
-};
+}
 
 export default LoginPage;

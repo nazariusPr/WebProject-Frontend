@@ -1,10 +1,10 @@
 import { useState } from "react";
-import FormData from "../components/FormData";
-import EmailVerificationMessage from "../components/EmailVerificationMessage";
+import Form from "../components/UI/Form";
+import EmailVerificationMessage from "../components/Email/EmailVerificationMessage";
 import RoutesConstant from "../constants/client/RoutesConstant";
 import styles from "../styles/Page.module.css";
 import Validator from "../utils/validator";
-import { FieldType } from "../components/FormData";
+import { FieldType } from "../components/UI/Form";
 import { AuthenticationDto } from "../types/Authentication";
 import { registerUser } from "../api/authenticationApi";
 
@@ -51,7 +51,7 @@ function RegistrationPage() {
       {isSent ? (
         <EmailVerificationMessage email={formData.email} onResend={() => {}} />
       ) : (
-        <FormData
+        <Form
           handleSubmit={handleSubmit}
           formData={formData}
           formTitle="Registration Page"

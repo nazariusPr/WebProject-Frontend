@@ -1,5 +1,5 @@
-import styles from "../styles/EmailVerificationMessage.module.css";
-import Button from "./Button";
+import styles from "../../styles/EmailVerificationMessage.module.css";
+import Button from "../UI/Button";
 
 type EmailVerificationMessageProps = {
   email: string;
