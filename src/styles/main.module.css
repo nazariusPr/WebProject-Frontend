@@ -4,6 +4,13 @@ body {
   margin: 0;
 }
 
+.container {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .form {
   display: flex;
   flex-direction: column;
@@ -22,13 +29,6 @@ body {
   color: #333;
   margin-bottom: 20px;
   font-size: 1.5em;
-}
-
-.container {
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .fieldContainer {
@@ -107,4 +107,49 @@ body {
   .button {
     width: 100%;
   }
+}
+
+.box {
+  flex: 1;
+  height: 100%;
+  margin: 0 5px;
+  background-color: #007bff;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: white;
+  font-family: "Arial", sans-serif;
+  font-size: 20px;
+  border-radius: 5px;
+  padding: 15px;
+  transition: transform 0.3s ease;
+}
+
+.boxTitle {
+  margin: 0;
+  font-weight: bold;
+  font-size: 24px;
+  transition: font-size 0.3s ease;
+}
+
+.boxDescription {
+  margin: 10px 0 0 0;
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.5;
+  transition: font-size 0.3s ease;
+}
+
+.box:hover {
+  transform: scale(0.95);
+}
+
+.box:hover .boxTitle {
+  font-size: 26px;
+}
+
+.box:hover .boxDescription {
+  font-size: 24px;
 }

@@ -1,29 +1,40 @@
-import { useNavigate } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
-import { logout } from "../api/authenticationApi";
-import RoutesConstant from "../constants/client/RoutesConstant";
-import Button from "../components/UI/Button";
+import BoxButton from "../components/UI/BoxButton";
+import styles from "../styles/home.module.css";
 
 const HomePage = () => {
-  const { setAccessToken } = useAuth();
-  const navigate = useNavigate();
+  const handleGenerateImage = () => {
+    console.log("Generate Image clicked");
+  };
 
-  const handleLogout = async () => {
-    try {
-      setAccessToken(null);
-      await logout();
-      navigate(RoutesConstant.LOGIN);
-    } catch (error) {
-      console.error("Logout failed:", error);
-    }
+  const handleAnalyzeImage = () => {
+    console.log("Analyze Image clicked");
+  };
+
+  const handleSeePreviousActions = () => {
+    console.log("See Previous Actions clicked");
   };
 
   return (
-    <div>
-      <h1>Home page</h1>
-      <p>Welcome to your home page!</p>
-      <p>This page is protected and can only be accessed by logged-in users.</p>
-      <Button onClick={handleLogout}>Logout</Button>
+    <div className={styles.container}>
+      <div className={styles["top-row"]}>
+        <BoxButton
+          title="Generate Image"
+          description="Create stunning images using advanced algorithms."
+          onClick={handleGenerateImage}
+        />
+        <BoxButton
+          title="Analyze Image"
+          description="Analyze images for insights and data extraction."
+          onClick={handleAnalyzeImage}
+        />
+      </div>
+      <div className={styles["bottom-row"]}>
+        <BoxButton
+          title="See Previous Actions"
+          description="Review your previous image generation and analysis actions."
+          onClick={handleSeePreviousActions}
+        />
+      </div>
     </div>
   );
 };
