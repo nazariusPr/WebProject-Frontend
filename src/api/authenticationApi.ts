@@ -1,37 +1,43 @@
 import axiosInstance from "./axiosInstance";
-import ApiConstants from "../constants/server/ApiConstants";
+import { AuthApiConstants } from "../constants/server/ApiConstants";
 import { AuthenticationDto } from "../types/Authentication";
 
 export function authenticateUser(authenticationDto: AuthenticationDto) {
-  return axiosInstance.post(ApiConstants.AUTHENTICATE_USER, authenticationDto, {
-    withCredentials: true,
-  });
+  return axiosInstance.post(
+    AuthApiConstants.AUTHENTICATE_USER,
+    authenticationDto,
+    {
+      withCredentials: true,
+    }
+  );
 }
 
 export function registerUser(authenticationDto: AuthenticationDto) {
-  return axiosInstance.post(ApiConstants.REGISTER_USER, authenticationDto);
+  return axiosInstance.post(AuthApiConstants.REGISTER_USER, authenticationDto);
 }
 
 export function refreshToken() {
-  return axiosInstance.get(ApiConstants.REFRESH_TOKEN, {
+  return axiosInstance.get(AuthApiConstants.REFRESH_TOKEN, {
     withCredentials: true,
   });
 }
 
 export function verifyEmail(token: string) {
-  return axiosInstance.get(ApiConstants.VERIFY_EMAIL, {
+  return axiosInstance.get(AuthApiConstants.VERIFY_EMAIL, {
     params: { token },
     withCredentials: true,
   });
 }
 
 export function resendVerificationEmail(email: string) {
-  return axiosInstance.post(ApiConstants.RESEND_VERIFICATION_EMAIL, null, {
+  return axiosInstance.post(AuthApiConstants.RESEND_VERIFICATION_EMAIL, null, {
     params: { email },
     withCredentials: true,
   });
 }
 
 export function logout() {
-  return axiosInstance.delete(ApiConstants.LOGOUT, { withCredentials: true });
+  return axiosInstance.delete(AuthApiConstants.LOGOUT, {
+    withCredentials: true,
+  });
 }
