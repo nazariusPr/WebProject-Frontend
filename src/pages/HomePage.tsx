@@ -1,4 +1,5 @@
 import BoxButton from "../components/UI/BoxButton";
+import Header from "../components/UI/Header";
 import styles from "../styles/home.module.css";
 
 const HomePage = () => {
@@ -16,6 +17,7 @@ const HomePage = () => {
 
   return (
     <div className={styles.container}>
+      <Header />
       <div className={styles["top-row"]}>
         <BoxButton
           title="Generate Image"

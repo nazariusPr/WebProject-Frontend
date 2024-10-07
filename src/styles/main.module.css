@@ -2,6 +2,7 @@ html,
 body {
   height: 100%;
   margin: 0;
+  font-family: "Arial", sans-serif;
 }
 
 .container {
@@ -9,6 +10,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: #007bff;
 }
 
 .form {
@@ -81,7 +83,7 @@ body {
   padding: 12px 20px;
   border: none;
   border-radius: 6px;
-  background-color: #007bff;
+  background-color: #0056b3;
   color: white;
   font-size: 16px;
   text-align: center;
@@ -90,7 +92,7 @@ body {
 }
 
 .button:hover {
-  background-color: #0056b3;
+  background-color: #007bff;
   transform: translateY(-2px);
 }
 
@@ -120,7 +122,6 @@ body {
   align-items: center;
   flex-direction: column;
   color: white;
-  font-family: "Arial", sans-serif;
   font-size: 20px;
   border-radius: 5px;
   padding: 15px;
@@ -143,6 +144,7 @@ body {
 }
 
 .box:hover {
+  cursor: pointer;
   transform: scale(0.95);
 }
 
@@ -152,4 +154,31 @@ body {
 
 .box:hover .boxDescription {
   font-size: 24px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+}
+
+.headerTitle {
+  font-size: 1.5em;
+  margin: 0;
+}
+
+.logoutButton {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 1.2em;
+  transition: transform 0.2s ease;
+}
+
+.logoutButton:hover {
+  transform: scale(1.1);
 }
