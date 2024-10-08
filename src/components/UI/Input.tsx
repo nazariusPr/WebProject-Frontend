@@ -5,8 +5,8 @@ import styles from "../../styles/main.module.css";
 type InputProps<T> = {
   value: string;
   field: FieldType<T>;
-  errorMessage: string | null;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  errorMessage?: string | null;
   className?: string;
 };
 

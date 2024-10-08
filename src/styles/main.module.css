@@ -100,6 +100,17 @@ body {
   transform: translateY(0);
 }
 
+.button.disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.button svg {
+  font-size: smaller;
+  margin: 0 4px;
+}
+
 @media (max-width: 600px) {
   .form {
     width: 90%;
@@ -195,6 +206,10 @@ body {
   cursor: pointer;
   color: white;
   transition: background-color 0.3s ease;
+
+  position: absolute;
+  top: 10px;
+  right: 10px;
 }
 
 .closeButton:hover {
@@ -208,4 +223,14 @@ body {
 
 .closeButton:focus {
   outline: none;
+}
+
+.counterContainer {
+  display: flex;
+  align-items: center;
+}
+
+.value {
+  width: 2rem;
+  text-align: center;
 }
