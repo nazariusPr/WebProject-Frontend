@@ -1,7 +1,16 @@
+import { useNavigate } from "react-router-dom";
+import CloseButton from "../components/UI/CloseButton";
 import withPopUp from "../hoc/withPopUp/withPopUp";
 
 function GenerateImagePage() {
-  return <p>Hello</p>;
+  const navigate = useNavigate();
+  return (
+    <CloseButton
+      onClick={() => {
+        navigate(-1);
+      }}
+    />
+  );
 }
 
 export default withPopUp(GenerateImagePage);

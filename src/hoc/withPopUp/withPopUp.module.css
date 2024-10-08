@@ -17,7 +17,6 @@
   height: 82%;
   margin: auto;
   background-color: #ffffff;
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -27,5 +26,18 @@
   position: absolute;
   top: 55%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) scale(0);
+
+  animation: fadeIn 0.5s ease forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
 }

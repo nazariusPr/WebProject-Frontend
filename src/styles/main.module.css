@@ -182,3 +182,30 @@ body {
 .logoutButton:hover {
   transform: scale(1.1);
 }
+
+.closeButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: #0056b3;
+  border: none;
+  border-radius: 35%;
+  cursor: pointer;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+.closeButton:hover {
+  background-color: rgba(0, 86, 179, 0.8);
+}
+
+.closeButton:hover svg {
+  transform: scale(1.7);
+  transition: transform 0.3s ease;
+}
+
+.closeButton:focus {
+  outline: none;
+}
