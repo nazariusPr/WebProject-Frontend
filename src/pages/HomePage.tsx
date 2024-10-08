@@ -1,11 +1,14 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import BoxButton from "../components/UI/BoxButton";
 import Header from "../components/UI/Header";
 import styles from "../styles/home.module.css";
+import RoutesConstant from "../constants/client/RoutesConstant";
 
 const HomePage = () => {
+  const navigate = useNavigate();
+
   const handleGenerateImage = () => {
-    console.log("Generate Image clicked");
+    navigate(RoutesConstant.GENERATE_IMAGE);
   };
 
   const handleAnalyzeImage = () => {

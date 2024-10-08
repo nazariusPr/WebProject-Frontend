@@ -1,4 +1,4 @@
-import withPopUp from "../hoc/withPopUp/withLoading";
+import withPopUp from "../hoc/withPopUp/withPopUp";
 
 function GenerateImagePage() {
   return <p>Hello</p>;

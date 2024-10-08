@@ -1,4 +1,4 @@
-import styles from "./withLoading.module.css";
+import styles from "./withPopUp.module.css";
 
 function withPopUp<T extends JSX.IntrinsicAttributes>(
   WrappedComponent: React.ComponentType<T>
