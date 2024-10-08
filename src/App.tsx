@@ -8,6 +8,7 @@ import VerifyEmailPage from "./pages/VerifyEmailPage";
 import HomePage from "./pages/HomePage";
 import RoutesConstant from "./constants/client/RoutesConstant";
 import AuthProvider from "./context/AuthContext";
+import GenerateImagePage from "./pages/GenerateImagePage";
 
 function App() {
   return (
@@ -27,7 +28,12 @@ function App() {
           </Route>
 
           <Route element={<ProtectedRoutes />}>
-            <Route path={RoutesConstant.HOME} element={<HomePage />} />
+            <Route path={RoutesConstant.HOME} element={<HomePage />}>
+              <Route
+                path={RoutesConstant.GENERATE_IMAGE}
+                element={<GenerateImagePage />}
+              />
+            </Route>
           </Route>
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
