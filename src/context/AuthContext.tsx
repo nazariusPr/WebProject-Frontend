@@ -6,7 +6,7 @@ import {
   useLayoutEffect,
   ReactNode,
 } from "react";
-import axios from "axios";
+import axiosInstance from "../api/axiosInstance";
 import { refreshToken } from "../api/authenticationApi";
 
 type AuthProviderProps = {
@@ -44,20 +44,20 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }, []);
 
   useLayoutEffect(() => {
-    const authInterceptor = axios.interceptors.request.use((config) => {
-      if (config.auth && accessToken) {
-        config.headers.Authorization = `Bearer ${accessToken}`;
-      }
+    const authInterceptor = axiosInstance.interceptors.request.use((config) => {
+      config.headers.Authorization = accessToken
+        ? `Bearer ${accessToken}`
+        : config.headers.Authorization;
       return config;
     });
 
     return () => {
-      axios.interceptors.request.eject(authInterceptor);
+      axiosInstance.interceptors.request.eject(authInterceptor);
     };
   }, [accessToken]);
 
   useLayoutEffect(() => {
-    const refreshInterceptor = axios.interceptors.response.use(
+    const refreshInterceptor = axiosInstance.interceptors.response.use(
       (response) => response,
       async (error) => {
         const originalRequest = error.config;
@@ -75,7 +75,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
             originalRequest.headers.Authorization = `Bearer ${access_token}`;
             originalRequest._retry = true;
 
-            return axios(originalRequest);
+            return axiosInstance(originalRequest);
           } catch (err) {
             setAccessToken(null);
           }
@@ -85,7 +85,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     );
 
     return () => {
-      axios.interceptors.response.eject(refreshInterceptor);
+      axiosInstance.interceptors.response.eject(refreshInterceptor);
     };
   }, []);
 

@@ -30,6 +30,7 @@ export enum ImageSize {
 }
 
 export type GenerateActionDto = {
+  title: string;
   prompt: string;
   size: ImageSize;
   num_images: number;
