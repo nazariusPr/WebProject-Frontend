@@ -1,6 +1,7 @@
 import axiosInstance from "./axiosInstance";
 import { ActionApiConstants } from "../constants/server/ApiConstants";
 import { ActionFilterDto, GenerateActionDto } from "../types/Action";
+import { Pageable } from "../types/Page";
 
 export function generateImage(generateActionDto: GenerateActionDto) {
   return axiosInstance.post(
@@ -9,7 +10,10 @@ export function generateImage(generateActionDto: GenerateActionDto) {
   );
 }
 
-export function filterActions(actionFilterDto: ActionFilterDto) {
+export function filterActions(
+  actionFilterDto: ActionFilterDto,
+  pageable: Pageable
+) {
   return axiosInstance.get(ActionApiConstants.GENERATE_IMAGE, {
     params: {
       prompt: actionFilterDto.prompt,
@@ -17,6 +21,8 @@ export function filterActions(actionFilterDto: ActionFilterDto) {
       action_status: actionFilterDto.action_status,
       begin: actionFilterDto.begin.toISOString(),
       end: actionFilterDto.end.toISOString(),
+      page: pageable.page,
+      size: pageable.size,
     },
   });
 }
