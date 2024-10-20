@@ -9,6 +9,9 @@ const images = [
   "src/assets/image4.jpg",
   "src/assets/image5.jpg",
   "src/assets/image6.jpg",
+  "src/assets/image7.jpg",
+  "src/assets/image8.jpg",
+  "src/assets/image9.jpg",
 ];
 
 function ImageCarousel() {

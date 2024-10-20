@@ -3,7 +3,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: stretch;
-  gap: 1rem;
   padding: 1.5rem;
   min-width: 800px;
   max-width: 1000px;
@@ -19,11 +18,11 @@
 }
 
 .input {
-  width: 350px;
+  width: 400px;
 }
 
 .promptInput {
-  width: 750px;
+  width: 875px;
 }
 
 .carouselContainer {
