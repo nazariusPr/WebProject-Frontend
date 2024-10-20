@@ -12,4 +12,5 @@ export const AuthApiConstants = {
 
 export const ActionApiConstants = {
   GENERATE_IMAGE: ACTION_CONTROLLER + "/generate-image",
-}
+  FILTER_ACTIONS: ACTION_CONTROLLER + "/filter",
+};

@@ -35,6 +35,14 @@ export type DetailActionDto = {
   action_request: GenerateActionDto;
 } & ActionDto;
 
+export type ActionFilterDto = {
+  prompt: string;
+  action_type: ActionType;
+  action_status: ActionStatus;
+  begin: Date;
+  end: Date;
+};
+
 export enum ImageSize {
   SMALL_IMAGE_SIZE = "256x256",
   MEDIUM_IMAGE_SIZE = "512x512",
