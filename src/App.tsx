@@ -9,6 +9,7 @@ import HomePage from "./pages/HomePage";
 import RoutesConstant from "./constants/client/RoutesConstant";
 import AuthProvider from "./context/AuthContext";
 import GenerateImagePage from "./pages/GenerateImagePage";
+import SeeAllActionsPage from "./pages/SeeAllActionsPage";
 
 function App() {
   return (
@@ -32,6 +33,10 @@ function App() {
               <Route
                 path={RoutesConstant.GENERATE_IMAGE}
                 element={<GenerateImagePage />}
+              />
+              <Route
+                path={RoutesConstant.SEE_ALL_ACTIONS}
+                element={<SeeAllActionsPage />}
               />
             </Route>
           </Route>
