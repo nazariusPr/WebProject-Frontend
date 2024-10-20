@@ -1,30 +1,50 @@
-import { useNavigate } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
-import { logout } from "../api/authenticationApi";
+import { Outlet, useNavigate } from "react-router-dom";
+import BoxButton from "../components/UI/BoxButton";
+import Header from "../components/UI/Header";
+import styles from "../styles/home.module.css";
 import RoutesConstant from "../constants/client/RoutesConstant";
-import Button from "../components/UI/Button";
 
 const HomePage = () => {
-  const { setAccessToken } = useAuth();
   const navigate = useNavigate();
 
-  const handleLogout = async () => {
-    try {
-      setAccessToken(null);
-      await logout();
-      navigate(RoutesConstant.LOGIN);
-    } catch (error) {
-      console.error("Logout failed:", error);
-    }
+  const handleGenerateImage = () => {
+    navigate(RoutesConstant.GENERATE_IMAGE);
+  };
+
+  const handleAnalyzeImage = () => {
+    console.log("Analyze Image clicked");
+  };
+
+  const handleSeePreviousActions = () => {
+    console.log("See Previous Actions clicked");
   };
 
   return (
-    <div>
-      <h1>Home page</h1>
-      <p>Welcome to your home page!</p>
-      <p>This page is protected and can only be accessed by logged-in users.</p>
-      <Button onClick={handleLogout}>Logout</Button>
-    </div>
+    <>
+      <div className={styles.container}>
+        <Header />
+        <div className={styles["top-row"]}>
+          <BoxButton
+            title="Generate Image"
+            description="Create stunning images using advanced algorithms."
+            onClick={handleGenerateImage}
+          />
+          <BoxButton
+            title="Analyze Image"
+            description="Analyze images for insights and data extraction."
+            onClick={handleAnalyzeImage}
+          />
+        </div>
+        <div className={styles["bottom-row"]}>
+          <BoxButton
+            title="See Previous Actions"
+            description="Review your previous image generation and analysis actions."
+            onClick={handleSeePreviousActions}
+          />
+        </div>
+      </div>
+      <Outlet />
+    </>
   );
 };
 

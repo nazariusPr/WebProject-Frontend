@@ -1,6 +1,7 @@
 const AUTH_CONTROLLER = "/auth";
+const ACTION_CONTROLLER = "/action";
 
-const ApiConstants = {
+export const AuthApiConstants = {
   AUTHENTICATE_USER: AUTH_CONTROLLER,
   REGISTER_USER: AUTH_CONTROLLER + "/register",
   REFRESH_TOKEN: AUTH_CONTROLLER + "/refresh-token",
@@ -9,4 +10,6 @@ const ApiConstants = {
   LOGOUT: AUTH_CONTROLLER + "/logout",
 };
 
-export default ApiConstants;
+export const ActionApiConstants = {
+  GENERATE_IMAGE: ACTION_CONTROLLER + "/generate-image",
+}

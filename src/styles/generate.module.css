@@ -1,0 +1,70 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  padding: 1.5rem;
+  min-width: 800px;
+  max-width: 1000px;
+  margin: 30px auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(44, 42, 42, 0.1);
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.input {
+  width: 400px;
+}
+
+.promptInput {
+  width: 875px;
+}
+
+.carouselContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin: auto;
+  position: relative;
+  max-width: 1000px;
+}
+
+.imageContainer {
+  display: flex;
+  justify-content: center;
+  width: 80%;
+  max-width: 750px;
+  height: 180px;
+  overflow: hidden;
+}
+
+.image {
+  width: 250px;
+  height: 100%;
+  margin: 0 5px;
+  transition: transform 0.5s ease;
+  object-fit: cover;
+}
+
+.arrowButton {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 24px;
+}
+
+.arrowButton:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.arrowButton:focus {
+  outline: none;
+}

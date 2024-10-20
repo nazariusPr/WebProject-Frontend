@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Spin } from "antd";
-import style from "./withLoading.module.css";
+import styles from "./withLoading.module.css";
 
 function withLoading<T>(
   WrappedComponent: React.ComponentType<
@@ -13,7 +13,7 @@ function withLoading<T>(
     return (
       <div style={{ position: "relative" }}>
         {loading && (
-          <div className={style["spinner-overlay"]}>
+          <div className={styles["spinner-overlay"]}>
             <Spin size="large" />
           </div>
         )}
