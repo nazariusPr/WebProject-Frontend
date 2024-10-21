@@ -1,0 +1,31 @@
+.formRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px; /* Space between elements */
+}
+
+.fullWidth {
+  width: 800px;
+}
+
+.inlineField {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.label {
+  margin-bottom: 5px;
+}
+
+.fieldContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}

@@ -14,13 +14,13 @@ export function filterActions(
   actionFilterDto: ActionFilterDto,
   pageable: Pageable
 ) {
-  return axiosInstance.get(ActionApiConstants.GENERATE_IMAGE, {
+  return axiosInstance.get(ActionApiConstants.FILTER_ACTIONS, {
     params: {
       prompt: actionFilterDto.prompt,
-      action_type: actionFilterDto.action_type,
-      action_status: actionFilterDto.action_status,
-      begin: actionFilterDto.begin.toISOString(),
-      end: actionFilterDto.end.toISOString(),
+      actionType: actionFilterDto.actionType,
+      actionStatus: actionFilterDto.actionStatus,
+      begin: actionFilterDto.begin,
+      end: actionFilterDto.end,
       page: pageable.page,
       size: pageable.size,
     },

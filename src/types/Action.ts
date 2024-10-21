@@ -37,10 +37,10 @@ export type DetailActionDto = {
 
 export type ActionFilterDto = {
   prompt: string;
-  action_type: ActionType;
-  action_status: ActionStatus;
-  begin: Date;
-  end: Date;
+  actionType: ActionType | string;
+  actionStatus: ActionStatus | string;
+  begin: string;
+  end: string;
 };
 
 export enum ImageSize {
