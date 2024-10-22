@@ -14,7 +14,7 @@ function ActionItem({ action, onActionClick }: ActionItemProps) {
       case ActionStatus.INPROGRESS:
         return (
           <Button
-            onClick={() => onActionClick(action.id, "stop")}
+            onClick={() => onActionClick(action.id, "cancel")}
             className={styles.progress}
           >
             <AiOutlineStop />

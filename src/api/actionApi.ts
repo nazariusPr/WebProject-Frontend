@@ -31,3 +31,13 @@ export function seeAction(actionId: string) {
   const url = ActionApiConstants.SEE_ACTION.replace("{actionId}", actionId);
   return axiosInstance.get(url);
 }
+
+export function cancelAction(actionId: string) {
+  const url = ActionApiConstants.CANCEL_ACTION.replace("{actionId}", actionId);
+  return axiosInstance.patch(url);
+}
+
+export function restartAction(actionId: string) {
+  const url = ActionApiConstants.RESTART_ACTION.replace("{actionId}", actionId);
+  return axiosInstance.patch(url);
+}

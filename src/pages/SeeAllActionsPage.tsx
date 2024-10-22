@@ -16,7 +16,12 @@ type SeeAllActionsPageProps = {
 
 function SeeAllActionsPage({ setLoading }: SeeAllActionsPageProps) {
   const [page, setPage] = useState<Pageable>({ page: 0, size: 3 });
-  const [actions, setActions] = useState<PageDto<ActionDto>>();
+  const [actions, setActions] = useState<PageDto<ActionDto>>({
+    elems: [],
+    total_pages: 0,
+    total_elems: 0,
+    current_page: 0,
+  });
   const [filter, setFilter] = useState<ActionFilterDto>({
     prompt: "",
     actionType: "",
@@ -39,7 +44,6 @@ function SeeAllActionsPage({ setLoading }: SeeAllActionsPageProps) {
         setLoading(true);
         const response = await filterActions(filter, page);
         setActions(response.data);
-        console.log(response.data);
       } catch (error) {
         let notification;
         if (axios.isAxiosError(error)) {
@@ -76,6 +80,7 @@ function SeeAllActionsPage({ setLoading }: SeeAllActionsPageProps) {
       <ActionFilterForm filter={filter} setFilter={setFilter} />
       <ActionList
         actions={actions}
+        setActions={setActions}
         page={page.page}
         onPrev={prev}
         onNext={next}
