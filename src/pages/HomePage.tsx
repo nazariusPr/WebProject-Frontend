@@ -16,7 +16,7 @@ const HomePage = () => {
   };
 
   const handleSeePreviousActions = () => {
-    console.log("See Previous Actions clicked");
+    navigate(RoutesConstant.SEE_ALL_ACTIONS);
   };
 
   return (

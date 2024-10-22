@@ -1,0 +1,152 @@
+.formRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.fullWidth {
+  width: 800px;
+}
+
+.inlineField {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.label {
+  margin-bottom: 5px;
+}
+
+.fieldContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.actionItem {
+  padding: 10px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.paginationButtons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.progress {
+  background-color: #ffc107;
+}
+
+.progress:hover {
+  background-color: #e0a800;
+}
+
+.canceled {
+  background-color: #dc3545;
+}
+
+.canceled:hover {
+  background-color: #c82333;
+}
+
+.title {
+  font-size: 24px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.container {
+  max-width: 800px;
+  margin: 10px auto;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  font-size: 24px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.imageContainer {
+  position: relative;
+  max-width: 100%;
+  height: 400px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.imageCaption {
+  text-align: center;
+  margin-top: 8px;
+  font-style: italic;
+}
+
+.arrowButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, 0.8);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  padding: 10px;
+  z-index: 10;
+  font-size: 24px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s;
+}
+
+.arrowButton:hover {
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.arrowButton.left {
+  left: 10px;
+}
+
+.arrowButton.right {
+  right: 10px;
+}
+
+.detailsRow {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.detailsContainer,
+.requestDetailsContainer {
+  flex: 1;
+  margin-right: 10px;
+  padding: 15px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.requestDetailsContainer {
+  margin-right: 0;
+}
+
+.detailsTitle {
+  font-size: 20px;
+  margin-bottom: 10px;
+}

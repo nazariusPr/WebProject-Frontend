@@ -5,28 +5,14 @@ export type ImageDto = {
 };
 
 export enum ActionType {
-  ANALYZED,
-  GENERATED,
+  ANALYZED = "ANALYZED",
+  GENERATED = "FINISHED",
 }
 
 export enum ActionStatus {
-  INPROGRESS,
-  CANCELLED,
-  FINISHED,
-}
-
-export type ActionDto = {
-  id: string;
-  action_type: ActionType;
-  action_status: ActionStatus;
-  created_at: Date;
-  images: ImageDto[];
-};
-
-export enum ImageSize {
-  SMALL_IMAGE_SIZE = "256x256",
-  MEDIUM_IMAGE_SIZE = "512x512",
-  LARGE_IMAGE_SIZE = "1024x1024",
+  INPROGRESS = "INPROGRESS",
+  CANCELLED = "CANCELLED",
+  FINISHED = "FINISHED",
 }
 
 export type GenerateActionDto = {
@@ -35,3 +21,30 @@ export type GenerateActionDto = {
   size: ImageSize;
   num_images: number;
 };
+
+export type ActionDto = {
+  id: string;
+  title: string;
+  action_type: ActionType;
+  action_status: ActionStatus;
+  created_at: Date;
+};
+
+export type DetailActionDto = {
+  images: ImageDto[];
+  action_request: GenerateActionDto;
+} & ActionDto;
+
+export type ActionFilterDto = {
+  prompt: string;
+  actionType: ActionType | string;
+  actionStatus: ActionStatus | string;
+  begin: string;
+  end: string;
+};
+
+export enum ImageSize {
+  SMALL_IMAGE_SIZE = "256x256",
+  MEDIUM_IMAGE_SIZE = "512x512",
+  LARGE_IMAGE_SIZE = "1024x1024",
+}

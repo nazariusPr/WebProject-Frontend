@@ -1,32 +1,31 @@
 import { ChangeEvent } from "react";
 import { FieldType } from "./Form";
 import styles from "../../styles/main.module.css";
-import { ImageSize } from "../../types/Action";
 
 type DropDownOption = {
   value: string;
   label: string;
 };
 
-type DropdownProps<T> = {
+type DropdownProps<T, E> = {
   value: string;
   field: FieldType<T>;
-  onChange: (size: ImageSize) => void;
+  onChange: (elem: E) => void;
   options: DropDownOption[];
   errorMessage?: string | null;
   className?: string;
 };
 
-function Dropdown<T>({
+function Dropdown<T, E>({
   value,
   field,
   errorMessage,
   onChange,
   options,
   className,
-}: DropdownProps<T>) {
+}: DropdownProps<T, E>) {
   const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    const selectedValue = event.target.value as ImageSize;
+    const selectedValue = event.target.value as E;
     onChange(selectedValue);
   };
   return (

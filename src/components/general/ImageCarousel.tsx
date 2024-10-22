@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 import Button from "../UI/Button";
 import styles from "../../styles/generate.module.css";
 
@@ -32,7 +33,7 @@ function ImageCarousel() {
   return (
     <div className={styles.carouselContainer}>
       <Button className={styles.arrowButton} onClick={prevSlide}>
-        &#8592;
+        <AiOutlineLeft />
       </Button>
       <div className={styles.imageContainer}>
         {images.slice(currentIndex, currentIndex + 3).map((img, index) => (
@@ -45,7 +46,7 @@ function ImageCarousel() {
         ))}
       </div>
       <Button className={styles.arrowButton} onClick={nextSlide}>
-        &#8594;
+        <AiOutlineRight />
       </Button>
     </div>
   );
