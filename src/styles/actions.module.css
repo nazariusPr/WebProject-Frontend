@@ -1,7 +1,7 @@
 .formRow {
   display: flex;
   justify-content: space-between;
-  gap: 20px; /* Space between elements */
+  gap: 20px;
 }
 
 .fullWidth {
@@ -28,4 +28,33 @@
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
+}
+
+.actionItem {
+  padding: 10px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.paginationButtons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.progress {
+  background-color: #ffc107;
+}
+
+.progress:hover {
+  background-color: #e0a800;
+}
+
+.canceled {
+  background-color: #dc3545;
+}
+
+.canceled:hover {
+  background-color: #c82333;
 }

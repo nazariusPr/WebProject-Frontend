@@ -1,21 +1,22 @@
 import axios from "axios";
 import { message } from "antd";
 import { useState, useEffect } from "react";
-import ActionFilterForm from "../components/general/ActionFilterForm";
+import ActionFilterForm from "../components/action/ActionFilterForm";
 import withLoading from "../hoc/withLoading/withLoading";
 import withPopUp from "../hoc/withPopUp/withPopUp";
 import { ActionFilterDto, ActionDto } from "../types/Action";
 import { filterActions } from "../api/actionApi";
+import { Pageable, PageDto } from "../types/Page";
+import ActionList from "../components/action/ActionList";
 import styles from "../styles/main.module.css";
-import { Pageable } from "../types/Page";
 
 type SeeAllActionsPageProps = {
   setLoading: (state: boolean) => void;
 };
 
 function SeeAllActionsPage({ setLoading }: SeeAllActionsPageProps) {
-  const [page, setPage] = useState<Pageable>({ page: 0, size: 5 });
-  const [actions, setActions] = useState<ActionDto[]>([]);
+  const [page, setPage] = useState<Pageable>({ page: 0, size: 3 });
+  const [actions, setActions] = useState<PageDto<ActionDto>>();
   const [filter, setFilter] = useState<ActionFilterDto>({
     prompt: "",
     actionType: "",
@@ -25,12 +26,20 @@ function SeeAllActionsPage({ setLoading }: SeeAllActionsPageProps) {
   });
 
   useEffect(() => {
-    const handleFilterChange = async () => {
+    const handleFilterChange = () => {
+      setPage({ page: 0, size: 3 });
+    };
+
+    handleFilterChange();
+  }, [filter]);
+
+  useEffect(() => {
+    const handlePageChange = async () => {
       try {
         setLoading(true);
         const response = await filterActions(filter, page);
-        setActions(response.data.elems);
-        console.log(response.data.elems);
+        setActions(response.data);
+        console.log(response.data);
       } catch (error) {
         let notification;
         if (axios.isAxiosError(error)) {
@@ -44,15 +53,33 @@ function SeeAllActionsPage({ setLoading }: SeeAllActionsPageProps) {
       }
     };
 
-    handleFilterChange();
-  }, [filter]);
+    handlePageChange();
+  }, [page]);
+
+  const next = () => {
+    if (actions && page.page < actions.total_pages - 1) {
+      setPage((prevPage) => ({ ...prevPage, page: prevPage.page + 1 }));
+    }
+  };
+
+  const prev = () => {
+    if (page.page > 0) {
+      setPage((prevPage) => ({ ...prevPage, page: prevPage.page - 1 }));
+    }
+  };
 
   return (
     <>
       <h1 className={styles.title} style={{ margin: "10px" }}>
         See All Actions
       </h1>
-      <ActionFilterForm filter={filter} setFilter={setFilter} />{" "}
+      <ActionFilterForm filter={filter} setFilter={setFilter} />
+      <ActionList
+        actions={actions}
+        page={page.page}
+        onPrev={prev}
+        onNext={next}
+      />
     </>
   );
 }

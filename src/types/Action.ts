@@ -5,14 +5,14 @@ export type ImageDto = {
 };
 
 export enum ActionType {
-  ANALYZED,
-  GENERATED,
+  ANALYZED = "ANALYZED",
+  GENERATED = "FINISHED",
 }
 
 export enum ActionStatus {
-  INPROGRESS,
-  CANCELLED,
-  FINISHED,
+  INPROGRESS = "INPROGRESS",
+  CANCELLED = "CANCELLED",
+  FINISHED = "FINISHED",
 }
 
 export type GenerateActionDto = {
