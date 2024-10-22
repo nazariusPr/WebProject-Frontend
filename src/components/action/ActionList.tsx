@@ -1,8 +1,10 @@
+import { useNavigate } from "react-router-dom";
 import { ActionDto } from "../../types/Action";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 import { PageDto } from "../../types/Page";
 import ActionItem from "./ActionItem";
 import Button from "../UI/Button";
+import RoutesConstant from "../../constants/client/RoutesConstant";
 import styles from "../../styles/actions.module.css";
 
 type ActionListProps = {
@@ -13,17 +15,28 @@ type ActionListProps = {
 };
 
 function ActionList({ actions, page, onPrev, onNext }: ActionListProps) {
+  const navigate = useNavigate();
+
+  const handleOnClick = (actionId: string, actionType: string) => {
+    switch (actionType) {
+      case "view":
+        navigate(RoutesConstant.SEE_ACTION.replace(":actionId", actionId));
+        break;
+      default:
+        console.log("Unknown action type");
+    }
+  };
   return (
     <>
       <div>
         {actions?.elems.length === 0 ? (
-          <p>No actions available.</p> 
+          <p>No actions available.</p>
         ) : (
           actions?.elems.map((action) => (
             <ActionItem
               key={action.id}
               action={action}
-              onActionClick={() => {}}
+              onActionClick={handleOnClick}
             />
           ))
         )}

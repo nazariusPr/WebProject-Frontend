@@ -26,3 +26,8 @@ export function filterActions(
     },
   });
 }
+
+export function seeAction(actionId: string) {
+  const url = ActionApiConstants.SEE_ACTION.replace("{actionId}", actionId);
+  return axiosInstance.get(url);
+}
