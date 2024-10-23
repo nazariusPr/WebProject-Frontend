@@ -87,6 +87,7 @@ function ActionList({
           actions?.elems.map((action) => (
             <ActionItem
               key={action.id}
+              updateActionStatus={updateActionStatus}
               action={action}
               onActionClick={handleOnClick}
             />

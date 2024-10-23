@@ -1,14 +1,25 @@
 import { ActionDto, ActionStatus } from "../../types/Action";
 import { AiOutlineStop, AiOutlineReload, AiOutlineEye } from "react-icons/ai";
+import { useAuth } from "../../context/AuthContext";
+import useActionUpdate from "../../hooks/useActionUpdate";
 import Button from "../UI/Button";
 import styles from "../../styles/actions.module.css";
 
 type ActionItemProps = {
   action: ActionDto;
+  updateActionStatus: (actionId: string, status: ActionStatus) => void;
   onActionClick: (actionId: string, actionType: string) => void;
 };
 
-function ActionItem({ action, onActionClick }: ActionItemProps) {
+function ActionItem({
+  action,
+  updateActionStatus,
+  onActionClick,
+}: ActionItemProps) {
+  if (action.action_status === ActionStatus.INPROGRESS) {
+    const { accessToken } = useAuth();
+    useActionUpdate({ actionId: action.id, accessToken, updateActionStatus });
+  }
   const getButton = () => {
     switch (action.action_status) {
       case ActionStatus.INPROGRESS:
