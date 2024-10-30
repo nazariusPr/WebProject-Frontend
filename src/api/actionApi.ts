@@ -41,3 +41,8 @@ export function restartAction(actionId: string) {
   const url = ActionApiConstants.RESTART_ACTION.replace("{actionId}", actionId);
   return axiosInstance.patch(url);
 }
+
+export function getActionStatus(actionId: string){
+  const url = ActionApiConstants.GET_ACTION_STATUS.replace("{actionId}", actionId);
+  return axiosInstance.get(url);
+}

@@ -1,9 +1,8 @@
 import { ActionDto, ActionStatus } from "../../types/Action";
 import { AiOutlineStop, AiOutlineReload, AiOutlineEye } from "react-icons/ai";
-import { useAuth } from "../../context/AuthContext";
-import useActionUpdate from "../../hooks/useActionUpdate";
 import Button from "../UI/Button";
 import styles from "../../styles/actions.module.css";
+import useActionPolling from "../../hooks/userActionPolling";
 
 type ActionItemProps = {
   action: ActionDto;
@@ -17,8 +16,13 @@ function ActionItem({
   onActionClick,
 }: ActionItemProps) {
   if (action.action_status === ActionStatus.INPROGRESS) {
-    const { accessToken } = useAuth();
-    useActionUpdate({ actionId: action.id, accessToken, updateActionStatus });
+    //useActionUpdate({ actionId: action.id, accessToken, updateActionStatus });
+    useActionPolling({
+      actionId: action.id,
+      desiredStatus: ActionStatus.FINISHED,
+      updateActionStatus,
+      interval: 2500,
+    });
   }
   const getButton = () => {
     switch (action.action_status) {

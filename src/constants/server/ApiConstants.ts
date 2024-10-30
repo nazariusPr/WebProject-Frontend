@@ -16,4 +16,5 @@ export const ActionApiConstants = {
   SEE_ACTION: ACTION_CONTROLLER + "/{actionId}",
   CANCEL_ACTION: ACTION_CONTROLLER + "/cancel/{actionId}",
   RESTART_ACTION: ACTION_CONTROLLER + "/restart/{actionId}",
+  GET_ACTION_STATUS: ACTION_CONTROLLER + "/{actionId}/status",
 };
