@@ -1,3 +1,4 @@
+import { GoogleLogin } from "@react-oauth/google";
 import { ChangeEvent, useState } from "react";
 import { message } from "antd";
 import Description from "../general/Description";
@@ -15,6 +16,7 @@ export type FieldType<T> = {
 type FormParams<T> = {
   formTitle: string;
   handleSubmit: () => void;
+  handleGoogleLogin: (token: string) => void;
   formData: T;
   handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
   fields: FieldType<T>[];
@@ -32,6 +34,7 @@ function Form<T>({
   linkTo,
   handleSubmit,
   handleChange,
+  handleGoogleLogin,
 }: FormParams<T>) {
   const [errors, setErrors] = useState<Record<string, string | null>>({});
   const hasErrors = Object.values(errors).some((error) => error !== null);
@@ -59,6 +62,10 @@ function Form<T>({
     message.error(errorMessages || "There are some validation errors.");
   };
 
+  const onGoogleLoginSuccess = (response: any) => {
+    handleGoogleLogin(response.credential);
+  };
+
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
       <h2 className={styles.title}>{formTitle}</h2>
@@ -72,6 +79,16 @@ function Form<T>({
         />
       ))}
       <Button onClick={hasErrors ? onError : handleSubmit}>Submit</Button>
+
+      <div style={{ marginTop: "20px" }}>
+        <GoogleLogin
+          onSuccess={onGoogleLoginSuccess}
+          onError={() => message.error("Google login failed")}
+          theme="outline"
+          size="large"
+        />
+      </div>
+
       {description && (
         <Description linkText={linkText} linkTo={linkTo}>
           {description}

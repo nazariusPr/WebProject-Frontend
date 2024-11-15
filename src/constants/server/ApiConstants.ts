@@ -3,6 +3,7 @@ const ACTION_CONTROLLER = "/action";
 
 export const AuthApiConstants = {
   AUTHENTICATE_USER: AUTH_CONTROLLER,
+  GOOGLE_OAUTH: AUTH_CONTROLLER + "/google",
   REGISTER_USER: AUTH_CONTROLLER + "/register",
   REFRESH_TOKEN: AUTH_CONTROLLER + "/refresh-token",
   VERIFY_EMAIL: AUTH_CONTROLLER,

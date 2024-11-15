@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import { useAuth } from "../context/AuthContext";
 import { message } from "antd";
 import withLoading from "../hoc/withLoading/withLoading";
 import Form from "../components/UI/Form";
@@ -12,6 +13,7 @@ import { AuthenticationDto } from "../types/Authentication";
 import {
   registerUser,
   resendVerificationEmail,
+  googleOAuth,
 } from "../api/authenticationApi";
 
 type RegistrationPage = {
@@ -19,6 +21,7 @@ type RegistrationPage = {
 };
 
 function RegistrationPage({ setLoading }: RegistrationPage) {
+  const { setAccessToken } = useAuth();
   const [formData, setFormData] = useState<AuthenticationDto>({
     email: "",
     password: "",
@@ -43,6 +46,28 @@ function RegistrationPage({ setLoading }: RegistrationPage) {
         notification = error.response?.data?.message;
       } else {
         notification = "Registration failed. Please try again.";
+      }
+      message.error(notification);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleGoogleLogin = async (token: string) => {
+    try {
+      setLoading(true);
+
+      const response = await googleOAuth({ token });
+      setAccessToken(response.data.access_token);
+
+      message.success("Welcome !");
+    } catch (error) {
+      let notification;
+
+      if (axios.isAxiosError(error)) {
+        notification = error.response?.data?.message;
+      } else {
+        notification = "Authentication failed. Please try again.";
       }
       message.error(notification);
     } finally {
@@ -93,6 +118,7 @@ function RegistrationPage({ setLoading }: RegistrationPage) {
       ) : (
         <Form
           handleSubmit={handleSubmit}
+          handleGoogleLogin={handleGoogleLogin}
           formData={formData}
           formTitle="Registration Page"
           handleChange={handleChange}

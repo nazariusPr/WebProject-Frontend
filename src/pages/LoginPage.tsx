@@ -6,7 +6,7 @@ import styles from "../styles/main.module.css";
 import { message } from "antd";
 import { FieldType } from "../components/UI/Form";
 import { AuthenticationDto } from "../types/Authentication";
-import { authenticateUser } from "../api/authenticationApi";
+import { authenticateUser, googleOAuth } from "../api/authenticationApi";
 import { useAuth } from "../context/AuthContext";
 import withLoading from "../hoc/withLoading/withLoading";
 import Validator from "../utils/validator";
@@ -52,6 +52,28 @@ function LoginPage({ setLoading }: LoginPageType) {
     }
   };
 
+  const handleGoogleLogin = async (token: string) => {
+    try {
+      setLoading(true);
+
+      const response = await googleOAuth({ token });
+      setAccessToken(response.data.access_token);
+
+      message.success("Welcome !");
+    } catch (error) {
+      let notification;
+
+      if (axios.isAxiosError(error)) {
+        notification = error.response?.data?.message;
+      } else {
+        notification = "Authentication failed. Please try again.";
+      }
+      message.error(notification);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const fields: FieldType<AuthenticationDto>[] = [
     {
       name: "email",
@@ -77,6 +99,7 @@ function LoginPage({ setLoading }: LoginPageType) {
         linkText="Register here"
         linkTo={RoutesConstant.REGISTER}
         handleSubmit={handleSubmit}
+        handleGoogleLogin={handleGoogleLogin}
         handleChange={handleChange}
       />
     </div>

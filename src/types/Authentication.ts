@@ -3,6 +3,10 @@ export type AuthenticationDto = {
   password: string;
 };
 
+export type GoogleOAthDto = {
+  token: string;
+};
+
 export type TokenDto = {
   access_token: string;
 };

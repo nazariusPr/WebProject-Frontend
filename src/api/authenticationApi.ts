@@ -1,6 +1,6 @@
 import axiosInstance from "./axiosInstance";
 import { AuthApiConstants } from "../constants/server/ApiConstants";
-import { AuthenticationDto } from "../types/Authentication";
+import { AuthenticationDto, GoogleOAthDto } from "../types/Authentication";
 
 export function authenticateUser(authenticationDto: AuthenticationDto) {
   return axiosInstance.post(
@@ -10,6 +10,12 @@ export function authenticateUser(authenticationDto: AuthenticationDto) {
       withCredentials: true,
     }
   );
+}
+
+export function googleOAuth(googleOAuthDto: GoogleOAthDto) {
+  return axiosInstance.post(AuthApiConstants.GOOGLE_OAUTH, googleOAuthDto, {
+    withCredentials: true,
+  });
 }
 
 export function registerUser(authenticationDto: AuthenticationDto) {

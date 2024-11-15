@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 import ProtectedRoutes from "./routes/ProtectedRoutes";
 import AuthenticationRoutes from "./routes/AuthenticationRoutes";
 import RegistrationPage from "./pages/RegistrationPage";
@@ -14,41 +15,43 @@ import SeeAllActionsPage from "./pages/SeeAllActionsPage";
 
 function App() {
   return (
-    <AuthProvider>
-      <Router>
-        <Routes>
-          <Route element={<AuthenticationRoutes />}>
-            <Route path={RoutesConstant.LOGIN} element={<LoginPage />} />
-            <Route
-              path={RoutesConstant.REGISTER}
-              element={<RegistrationPage />}
-            />
-            <Route
-              path={RoutesConstant.VERIFY_EMAIL}
-              element={<VerifyEmailPage />}
-            />
-          </Route>
-
-          <Route element={<ProtectedRoutes />}>
-            <Route path={RoutesConstant.HOME} element={<HomePage />}>
+    <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
+      <AuthProvider>
+        <Router>
+          <Routes>
+            <Route element={<AuthenticationRoutes />}>
+              <Route path={RoutesConstant.LOGIN} element={<LoginPage />} />
               <Route
-                path={RoutesConstant.GENERATE_IMAGE}
-                element={<GenerateImagePage />}
+                path={RoutesConstant.REGISTER}
+                element={<RegistrationPage />}
               />
               <Route
-                path={RoutesConstant.SEE_ACTION}
-                element={<SeeActionPage />}
-              />
-              <Route
-                path={RoutesConstant.SEE_ALL_ACTIONS}
-                element={<SeeAllActionsPage />}
+                path={RoutesConstant.VERIFY_EMAIL}
+                element={<VerifyEmailPage />}
               />
             </Route>
-          </Route>
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
-      </Router>
-    </AuthProvider>
+
+            <Route element={<ProtectedRoutes />}>
+              <Route path={RoutesConstant.HOME} element={<HomePage />}>
+                <Route
+                  path={RoutesConstant.GENERATE_IMAGE}
+                  element={<GenerateImagePage />}
+                />
+                <Route
+                  path={RoutesConstant.SEE_ACTION}
+                  element={<SeeActionPage />}
+                />
+                <Route
+                  path={RoutesConstant.SEE_ALL_ACTIONS}
+                  element={<SeeAllActionsPage />}
+                />
+              </Route>
+            </Route>
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </Router>
+      </AuthProvider>
+    </GoogleOAuthProvider>
   );
 }
 
